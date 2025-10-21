@@ -1,0 +1,313 @@
+.todo-item {
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  transition: all 0.2s ease;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.todo-item:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow);
+}
+
+.todo-item.completed {
+  opacity: 0.6;
+  background: var(--bg-color);
+}
+
+.todo-item.priority-high {
+  border-left: 4px solid var(--danger-color);
+}
+
+.todo-item.priority-medium {
+  border-left: 4px solid var(--warning-color);
+}
+
+.todo-item.priority-low {
+  border-left: 4px solid var(--success-color);
+}
+
+/* Checkbox Styling */
+.todo-checkbox {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.todo-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.todo-checkbox label {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.todo-checkbox input[type="checkbox"]:checked + label {
+  background: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.todo-checkbox input[type="checkbox"]:checked + label::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Todo Content */
+.todo-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-text {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  word-wrap: break-word;
+  line-height: 1.5;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.todo-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.category-badge.general {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+}
+
+.category-badge.work {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.category-badge.personal {
+  background: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+}
+
+.category-badge.shopping {
+  background: rgba(236, 72, 153, 0.1);
+  color: #ec4899;
+}
+
+.category-badge.health {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.category-badge.finance {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.category-badge.education {
+  background: rgba(249, 115, 22, 0.1);
+  color: #f97316;
+}
+
+.category-badge.home {
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+}
+
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priority-badge.high {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger-color);
+}
+
+.priority-badge.medium {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning-color);
+}
+
+.priority-badge.low {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+}
+
+.due-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  background: var(--bg-color);
+  border-radius: 20px;
+}
+
+.due-date.overdue {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+/* Todo Actions */
+.todo-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  opacity: 1;
+  background: var(--bg-color);
+}
+
+.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Edit Mode */
+.todo-item.editing {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.edit-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.edit-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.edit-priority,
+.edit-date,
+.edit-category {
+  padding: 8px 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: white;
+}
+
+.save-btn,
+.cancel-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-btn {
+  background: var(--success-color);
+  color: white;
+}
+
+.save-btn:hover {
+  background: #059669;
+}
+
+.cancel-btn {
+  background: var(--border-color);
+  color: var(--text-primary);
+}
+
+.cancel-btn:hover {
+  background: var(--text-secondary);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .todo-item {
+    padding: 15px;
+  }
+
+  .todo-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

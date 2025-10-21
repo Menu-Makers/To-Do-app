@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App: Features and Functionalities</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .infographic {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #3b5998 0%, #192f5d 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        /* Purpose Section */
+        .purpose-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 50px 40px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        .purpose-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 40px;
+        }
+
+        /* Core Features */
+        .features-list {
+            list-style: none;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            font-size: 1.15rem;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Functionalities Section */
+        .functionalities-section {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            padding: 50px 40px;
+        }
+
+        .functionality-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .functionality-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .functionality-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0891b2;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .functionality-desc {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Tech Stack Section */
+        .tech-stack-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .tech-stack-section .section-title {
+            color: white;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .tech-label {
+            font-size: 0.9rem;
+            color: #cbd5e0;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .tech-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .footer-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 10px 25px;
+            border-radius: 25px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            .infographic {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="app-icon">✓</div>
+                <h1>To-Do App: Features<br>and Functionalities</h1>
+                <p>Stay organized, productive, and on track with your daily goals!</p>
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Purpose Section -->
+            <div class="purpose-section">
+                <h2 class="section-title">
+                    <span class="section-icon">🎯</span>
+                    Purpose
+                </h2>
+                <p class="purpose-text">
+                    The To-Do App helps users organize, track, and complete daily tasks efficiently. 
+                    It promotes productivity, ensures deadlines are met, and enhances focus through 
+                    structured task management.
+                </p>
+
+                <h3 class="section-title" style="font-size: 2rem; margin-top: 40px;">
+                    <span class="section-icon">⚡</span>
+                    Core Features
+                </h3>
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <span class="feature-icon">✏️</span>
+                        Add Tasks
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">✏️</span>
+                        Edit Tasks
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">🗑️</span>
+                        Delete Tasks
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">✅</span>
+                        Mark as Completed
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">📅</span>
+                        Set Deadlines
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">⭐</span>
+                        Prioritize Tasks
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">🔍</span>
+                        Filter & Search
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">📁</span>
+                        Categorize Tasks
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Functionalities Section -->
+            <div class="functionalities-section">
+                <h2 class="section-title">
+                    <span class="section-icon">🚀</span>
+                    Functionalities
+                </h2>
+
+                <div class="functionality-card">
+                    <h3 class="functionality-title">
+                        📱 Responsive Interface
+                    </h3>
+                    <p class="functionality-desc">
+                        <span>💎</span>
+                        Works smoothly on all devices
+                    </p>
+                </div>
+
+                <div class="functionality-card">
+                    <h3 class="functionality-title">
+                        💾 Data Persistence
+                    </h3>
+                    <p class="functionality-desc">
+                        <span>🔒</span>
+                        Tasks saved using Local Storage
+                    </p>
+                </div>
+
+                <div class="functionality-card">
+                    <h3 class="functionality-title">
+                        ⚡ Dynamic UI Updates
+                    </h3>
+                    <p class="functionality-desc">
+                        <span>🔄</span>
+                        Real-time instantly
+                    </p>
+                </div>
+
+                <div class="functionality-card">
+                    <h3 class="functionality-title">
+                        🐙 GitHub Integration
+                    </h3>
+                    <p class="functionality-desc">
+                        <span>📌</span>
+                        Version control & collaboration
+                    </p>
+                </div>
+
+                <div class="functionality-card">
+                    <h3 class="functionality-title">
+                        🎨 Category Organization
+                    </h3>
+                    <p class="functionality-desc">
+                        <span>📋</span>
+                        8 categories with color coding
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Stack Section -->
+        <div class="tech-stack-section">
+            <h2 class="section-title">
+                <span class="section-icon">💻</span>
+                Tech Stack
+            </h2>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">⚛️</div>
+                    <div class="tech-label">Frontend</div>
+                    <div class="tech-name">React 18</div>
+                </div>
+
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-label">Build Tool</div>
+                    <div class="tech-name">Vite 5.0</div>
+                </div>
+
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-label">Styling</div>
+                    <div class="tech-name">CSS3</div>
+                </div>
+
+                <div class="tech-item">
+                    <div class="tech-icon">💾</div>
+                    <div class="tech-label">Storage</div>
+                    <div class="tech-name">Local Storage</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Developed for Full Stack Software Development Program</p>
+            <div class="footer-badge">CPL-5559-[FSDS]</div>
+        </div>
+    </div>
+</body>
+</html>
