@@ -23,3 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
+# Documentation/Guide files (not needed in repo)
+EASY_INFOGRAPHIC_OPTIONS.md
+INFOGRAPHIC_GUIDE.md
+PROJECT_SUMMARY.md
+CATEGORIES_FEATURE.md
+QUICKSTART.ps1
+infographic.html
+todo-app/
