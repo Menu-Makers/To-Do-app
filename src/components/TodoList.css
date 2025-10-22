@@ -3,10 +3,39 @@
   max-height: 600px;
   overflow-y: auto;
 }
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
  
 @media (max-width: 768px) {
   .todo-list {
     padding: 15px 20px 20px;
+  }
+
+  .empty-state {
+    padding: 60px 20px;
+  }
+
+  .empty-icon {
+    font-size: 3rem;
+  }
+
+  .empty-text {
+    font-size: 1rem;
   }
 }
  
