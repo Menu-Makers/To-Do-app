@@ -4,11 +4,11 @@
   background: var(--bg-color);
   border-bottom: 1px solid var(--border-color);
 }
- 
+
 .form-group {
   margin-bottom: 15px;
 }
- 
+
 .form-group label {
   display: block;
   font-size: 0.85rem;
@@ -18,7 +18,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
- 
+
 .todo-input {
   width: 100%;
   padding: 15px 20px;
@@ -28,20 +28,20 @@
   transition: all 0.2s ease;
   background: white;
 }
- 
+
 .todo-input:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
- 
+
 .form-row {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 15px;
-  align-items: end;
+  align-items: center;
 }
- 
+
 .priority-select,
 .date-input,
 .category-select {
@@ -54,7 +54,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
- 
+
 .priority-select:focus,
 .date-input:focus,
 .category-select:focus {
@@ -62,7 +62,7 @@
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
- 
+
 .add-button {
   padding: 12px 24px;
   background: var(--primary-color);
@@ -79,31 +79,31 @@
   justify-content: center;
   box-shadow: var(--shadow);
 }
- 
+
 .add-button:hover {
   background: var(--primary-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
- 
+
 .add-button:active {
   transform: translateY(0);
 }
- 
+
 .add-button span {
   font-size: 1.3rem;
   font-weight: 700;
 }
- 
+
 @media (max-width: 768px) {
   .todo-form {
     padding: 20px;
   }
- 
+
   .form-row {
     grid-template-columns: 1fr;
   }
- 
+
   .add-button {
     width: 100%;
   }

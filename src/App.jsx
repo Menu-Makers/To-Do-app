@@ -134,8 +134,8 @@ function App() {
 
         {filteredTodos.length === 0 && (
           <div className="empty-state">
-            <div className="empty-icon">📝</div>
-            <h3>No tasks found</h3>
+            {/* <div className="empty-icon">📝</div>
+            <h3>No tasks found</h3> */}
             <p>
               {searchTerm
                 ? 'Try a different search term'
