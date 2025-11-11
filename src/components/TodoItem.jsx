@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './TodoItem.css'
+import ConfirmDialog from './ConfirmDialog'
 
 function TodoItem({ todo, onToggle, onDelete, onEdit }) {
   const [isEditing, setIsEditing] = useState(false)
@@ -7,6 +8,7 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
   const [editPriority, setEditPriority] = useState(todo.priority)
   const [editDueDate, setEditDueDate] = useState(todo.dueDate || '')
   const [editCategory, setEditCategory] = useState(todo.category || 'general')
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
 
   const handleSave = () => {
     if (editText.trim()) {
@@ -28,15 +30,33 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
     setIsEditing(false)
   }
 
+  const handleDelete = () => {
+    setShowDeleteDialog(true)
+  }
+
+  const confirmDelete = () => {
+    onDelete(todo.id)
+    setShowDeleteDialog(false)
+  }
+
+  const cancelDelete = () => {
+    setShowDeleteDialog(false)
+  }
+
   const formatDate = (dateString) => {
     if (!dateString) return null
-    const date = new Date(dateString)
+    const [year, month, day] = dateString.split('-')
+    const date = new Date(year, month - 1, day)
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
   }
 
   const isOverdue = () => {
     if (!todo.dueDate || todo.completed) return false
-    return new Date(todo.dueDate) < new Date()
+    const [year, month, day] = todo.dueDate.split('-')
+    const dueDate = new Date(year, month - 1, day)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0) 
+    return dueDate < today
   }
 
   const getCategoryIcon = (category) => {
@@ -156,12 +176,20 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
         </button>
         <button
           className="delete-btn"
-          onClick={() => onDelete(todo.id)}
+          onClick={handleDelete}
           title="Delete task"
         >
           🗑️
         </button>
       </div>
+
+      <ConfirmDialog
+        isOpen={showDeleteDialog}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+        title="Delete Task"
+        message={`Are you sure you want to delete "${todo.text}"? This action cannot be undone.`}
+      />
     </div>
   )
 }
